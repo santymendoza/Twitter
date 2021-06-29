@@ -7,8 +7,12 @@
 //
 
 #import "ComposeViewController.h"
+#import "APIManager.h"
+#import "Tweet.h"
 
-@interface ComposeViewController ()
+
+@interface ComposeViewController () <UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextView *composeView;
 
 @end
 
@@ -17,6 +21,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.composeView.delegate = self;
+}
+- (IBAction)closeButtonPressed:(id)sender {
+    //close compose tab
+    [self dismissViewControllerAnimated:true completion:nil];
+}
+- (IBAction)tweetButtonPressed:(id)sender {
+    [[APIManager shared]postStatusWithText:self.composeView.text completion:^(Tweet *, NSError *) {
+            if (self){
+                NSLog(@"worked");
+            }
+            else{
+                NSLog(@"didn't worked");
+            }
+    }];
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 /*

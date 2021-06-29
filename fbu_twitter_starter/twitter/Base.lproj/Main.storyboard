@@ -55,21 +55,45 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
         </scene>
-        <!--View Controller-->
+        <!--Compose View Controller-->
         <scene sceneID="zYy-iH-ZN7">
             <objects>
-                <viewController id="r1P-KH-g5r" sceneMemberID="viewController">
+                <viewController id="r1P-KH-g5r" customClass="ComposeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XmQ-Dj-7jv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text=":)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="db8-pP-wAr">
+                                <rect key="frame" x="0.0" y="118" width="375" height="145"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="dnd-Zt-hYP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Qt8-PW-prs"/>
+                    <navigationItem key="navigationItem" id="Qt8-PW-prs">
+                        <barButtonItem key="leftBarButtonItem" image="close-icon" id="aZe-tk-uZj">
+                            <connections>
+                                <action selector="closeButtonPressed:" destination="r1P-KH-g5r" id="08V-aD-Aus"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="6Z9-bI-WJO">
+                            <connections>
+                                <action selector="tweetButtonPressed:" destination="r1P-KH-g5r" id="5W4-yL-rCd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="composeView" destination="db8-pP-wAr" id="fy5-Bu-xyP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ea-Sn-ps3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3665" y="93"/>
+            <point key="canvasLocation" x="3664.8000000000002" y="92.203898050974516"/>
         </scene>
         <!--Home Timeline-->
         <scene sceneID="1Tv-nE-1AW">
@@ -188,6 +212,9 @@
                                 <rect key="frame" x="275" y="14.5" width="84" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="edit-icon"/>
+                                <connections>
+                                    <segue destination="Btl-KL-3lH" kind="presentation" id="0Fh-9S-AKw"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -224,7 +251,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Btl-KL-3lH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aff-5u-5Xr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -234,16 +261,20 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="97D-7n-8TG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2600.8000000000002" y="93.103448275862078"/>
+            <point key="canvasLocation" x="2660" y="-658"/>
         </scene>
     </scenes>
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>
+        <image name="close-icon" width="26" height="24"/>
         <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon" width="30" height="30"/>
         <image name="message-icon" width="30" height="30"/>
         <image name="reply-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
