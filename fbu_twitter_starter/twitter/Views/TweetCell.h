@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *favoritedButton;
+@property (weak, nonatomic) IBOutlet UIButton *messageButton;
+
 @property (nonatomic,strong) Tweet *tweet;
 @end
 

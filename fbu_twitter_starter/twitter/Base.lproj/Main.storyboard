@@ -126,7 +126,7 @@
                                                         <constraint firstAttribute="height" constant="56" id="peE-OK-rpn"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" ambiguous="YES" text="Santy Mendoza" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z1p-Iz-5bA">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Santy Mendoza" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z1p-Iz-5bA">
                                                     <rect key="frame" x="81" y="11" width="118" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -144,30 +144,46 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Pizza belongs on pineapple" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezk-Na-Vc0">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pizza belongs on pineapple" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezk-Na-Vc0">
                                                     <rect key="frame" x="81" y="42" width="284" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="03L-aw-65A">
-                                                    <rect key="frame" x="16" y="122" width="84" height="30"/>
+                                                    <rect key="frame" x="16" y="72.5" width="84" height="30"/>
                                                     <state key="normal" title="Button" image="reply-icon"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zH9-1U-j9J">
-                                                    <rect key="frame" x="125" y="122" width="84" height="30"/>
-                                                    <state key="normal" title="Button" image="retweet-icon"/>
+                                                    <rect key="frame" x="125" y="72.5" width="84" height="30"/>
+                                                    <state key="normal" title="Button" image="retweet-icon">
+                                                        <color key="titleColor" systemColor="opaqueSeparatorColor"/>
+                                                    </state>
+                                                    <state key="selected" image="retweet-icon-green">
+                                                        <color key="titleColor" systemColor="systemGreenColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapRetweet:" destination="WCh-8g-amY" eventType="touchUpInside" id="SK4-9N-vDY"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eED-OC-JkS">
-                                                    <rect key="frame" x="218" y="122" width="94" height="30"/>
+                                                    <rect key="frame" x="218" y="72.5" width="94" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="BXQ-8E-r9B"/>
                                                         <constraint firstAttribute="width" constant="94" id="WFI-VC-a2a"/>
                                                     </constraints>
-                                                    <state key="normal" title="Favorite" image="favor-icon"/>
+                                                    <state key="normal" title="Favorite" image="favor-icon">
+                                                        <color key="titleColor" systemColor="opaqueSeparatorColor"/>
+                                                    </state>
+                                                    <state key="selected" image="favor-icon-red">
+                                                        <color key="titleColor" systemColor="systemPinkColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didTapFavorite:" destination="WCh-8g-amY" eventType="touchUpInside" id="qWf-Ox-GtT"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Rn-SL-qOr">
-                                                    <rect key="frame" x="259" y="122" width="84" height="30"/>
+                                                    <rect key="frame" x="309" y="72.5" width="84" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="84" id="DRg-aw-aa1"/>
                                                         <constraint firstAttribute="height" constant="30" id="nNN-bI-mXz"/>
@@ -193,10 +209,10 @@
                                                 <constraint firstItem="eED-OC-JkS" firstAttribute="leading" secondItem="zH9-1U-j9J" secondAttribute="trailing" constant="9" id="We7-fe-2fp"/>
                                                 <constraint firstItem="ezk-Na-Vc0" firstAttribute="top" secondItem="Z1p-Iz-5bA" secondAttribute="bottom" constant="10" id="XV6-Xj-Lho"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zH9-1U-j9J" secondAttribute="bottom" constant="2" id="jep-jz-7BR"/>
-                                                <constraint firstItem="03L-aw-65A" firstAttribute="top" secondItem="ezk-Na-Vc0" secondAttribute="bottom" constant="62.5" id="nVZ-VB-Rpy"/>
+                                                <constraint firstItem="03L-aw-65A" firstAttribute="top" secondItem="ezk-Na-Vc0" secondAttribute="bottom" constant="10" id="nVZ-VB-Rpy"/>
                                                 <constraint firstItem="sfl-sV-XSf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gYf-SB-9rh" secondAttribute="trailing" constant="8" id="oTH-Ho-Usy"/>
                                                 <constraint firstItem="1Rn-SL-qOr" firstAttribute="top" secondItem="03L-aw-65A" secondAttribute="top" id="qzi-hz-KjW"/>
-                                                <constraint firstItem="1Rn-SL-qOr" firstAttribute="leading" secondItem="zH9-1U-j9J" secondAttribute="trailing" constant="50" id="uYt-NS-uES"/>
+                                                <constraint firstItem="1Rn-SL-qOr" firstAttribute="leading" secondItem="zH9-1U-j9J" secondAttribute="trailing" constant="100" id="uYt-NS-uES"/>
                                                 <constraint firstItem="Tqc-Oa-Eeq" firstAttribute="top" secondItem="nT5-4W-xh5" secondAttribute="top" constant="11" id="zXd-bc-Wdt"/>
                                                 <constraint firstItem="zH9-1U-j9J" firstAttribute="leading" secondItem="03L-aw-65A" secondAttribute="trailing" constant="25" id="zko-us-rkU"/>
                                             </constraints>
@@ -204,6 +220,7 @@
                                         <connections>
                                             <outlet property="date" destination="sfl-sV-XSf" id="6oP-Zi-h37"/>
                                             <outlet property="favoritedButton" destination="eED-OC-JkS" id="AKV-n7-6e1"/>
+                                            <outlet property="messageButton" destination="1Rn-SL-qOr" id="pog-41-ObC"/>
                                             <outlet property="name" destination="Z1p-Iz-5bA" id="9ax-kk-Bd4"/>
                                             <outlet property="profilePicture" destination="Tqc-Oa-Eeq" id="YI9-rc-3NW"/>
                                             <outlet property="retweetButton" destination="zH9-1U-j9J" id="2ts-FF-0Kw"/>
@@ -297,14 +314,25 @@
         <image name="close-icon" width="26" height="24"/>
         <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon" width="30" height="30"/>
+        <image name="favor-icon-red" width="30" height="30"/>
         <image name="message-icon" width="30" height="30"/>
         <image name="reply-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>
+        <image name="retweet-icon-green" width="30" height="30"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

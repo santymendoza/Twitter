@@ -85,6 +85,11 @@
     cell.userName.text = tweet.user.screenName;
     cell.date.text = tweet.createdAtString;
     cell.tweetText.text = tweet.text;
+    cell.tweet = tweet;
+    NSString *countString = [NSString stringWithFormat: @"%d", tweet.favoriteCount];
+    [cell.favoritedButton setTitle:countString forState:UIControlStateNormal];
+    countString = [NSString stringWithFormat: @"%d", tweet.retweetCount];
+    [cell.retweetButton setTitle:countString forState:UIControlStateNormal];
     //cell.retweetButton.textInputMode = tweet.retweetCount;
     
     NSString *URLString = tweet.user.profilePicture;
