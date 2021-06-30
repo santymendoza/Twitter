@@ -13,6 +13,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "TweetCell.h"
 #import "Tweet.h"
+#import "DateTools.h"
 
 @interface TimelineViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *logOutButton;
@@ -83,7 +84,10 @@
     Tweet *tweet = self.arrayOfTweets[indexPath.row];
     cell.name.text = tweet.user.name;
     cell.userName.text = tweet.user.screenName;
+   
     cell.date.text = tweet.createdAtString;
+    
+    
     cell.tweetText.text = tweet.text;
     cell.tweet = tweet;
     NSString *countString = [NSString stringWithFormat: @"%d", tweet.favoriteCount];
