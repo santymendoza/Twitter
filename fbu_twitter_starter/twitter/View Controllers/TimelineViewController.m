@@ -14,6 +14,7 @@
 #import "TweetCell.h"
 #import "Tweet.h"
 #import "DateTools.h"
+#import "DetailsViewController.h"
 
 @interface TimelineViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *logOutButton;
@@ -118,6 +119,17 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    UITableView *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell: tappedCell];
+    Tweet *tappedTweet = self.arrayOfTweets[indexPath.row];
+    
+    DetailsViewController *detailViewController = [segue destinationViewController];
+    detailViewController.tweet = tappedTweet;
+    
+}
 
 
 @end
