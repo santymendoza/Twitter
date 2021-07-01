@@ -41,7 +41,10 @@
     //cell.retweetButton.textInputMode = tweet.retweetCount;
     
     NSString *URLString = self.tweet.user.profilePicture;
+    URLString = [URLString
+           stringByReplacingOccurrencesOfString:@"_normal" withString:@""];
     NSURL *url = [NSURL URLWithString:URLString];
+    
     
     self.profilePicture.image = nil;
     [self.profilePicture setImageWithURL: url];
@@ -108,6 +111,8 @@
     }
     [self refreshData];
 }
+
+
 
 -(void) refreshData{
     self.userLabel.text = self.tweet.user.name;

@@ -53,10 +53,11 @@ static NSString * const baseURLString = @"https://api.twitter.com";
     return self;
 }
 
-- (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion {
-    
+
+- (void)getHomeTimelineWithMaxIdWithCompletion:(NSString *)maxId completion:(void(^)(NSArray *tweets, NSError *error))completion {
+    NSDictionary *parameters = @{@"tweet_mode":@"extended", @"max_id" : maxId};
     [self GET:@"1.1/statuses/home_timeline.json"
-       parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
+       parameters: parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
            // Success
            NSMutableArray *tweets  = [Tweet tweetsWithArray:tweetDictionaries];
            completion(tweets, nil);
@@ -65,6 +66,22 @@ static NSString * const baseURLString = @"https://api.twitter.com";
            completion(nil, error);
     }];
 }
+
+- (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion {
+    NSDictionary *parameters = @{@"tweet_mode":@"extended"};
+    [self GET:@"1.1/statuses/home_timeline.json"
+       parameters: parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
+           // Success
+           NSMutableArray *tweets  = [Tweet tweetsWithArray:tweetDictionaries];
+           completion(tweets, nil);
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           // There was a problem
+           completion(nil, error);
+    }];
+}
+
+
+
 
 - (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
 

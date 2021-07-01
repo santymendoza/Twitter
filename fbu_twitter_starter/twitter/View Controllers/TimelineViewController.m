@@ -16,10 +16,11 @@
 #import "DateTools.h"
 #import "DetailsViewController.h"
 
-@interface TimelineViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *logOutButton;
 @property (strong,nonatomic) NSMutableArray *arrayOfTweets;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (assign, nonatomic) BOOL isMoreDataLoading;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 
@@ -38,11 +39,6 @@
 
     
     [self getTimeLine];
-    
-    
-    
-    
-
 }
 
 
@@ -52,18 +48,20 @@
             self.arrayOfTweets = (NSMutableArray *)tweets;
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
-    }];
-    [self.refreshControl endRefreshing];
-    [self.tableView reloadData];
+    }];    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
 
 - (IBAction)logOutPressed:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -76,6 +74,45 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.arrayOfTweets.count;
+}
+
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row + 1 == self.arrayOfTweets.count){
+        //[self loadMoreData:self.arrayOfTweets.count + 20];
+    }
+}
+
+-(void)loadMoreData{
+    Tweet *lastTweet = self.arrayOfTweets[ self.arrayOfTweets.count - 1 ];
+    NSString *maxId = lastTweet.idStr; // go through the arrayOfTweets, get the last tweet being displayed, get the idStr of that tweet
+    [[APIManager shared] getHomeTimelineWithMaxIdWithCompletion:maxId completion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            [self.arrayOfTweets addObjectsFromArray:tweets];
+            NSLog(@"😎😎😎 Successfully loaded home timeline");
+            [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
+            self.isMoreDataLoading = false;
+        } else {
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(!self.isMoreDataLoading){
+
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+                
+                // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging){
+            self.isMoreDataLoading = true;
+            [self loadMoreData];
+
+        }
+    }
 }
 
 
@@ -95,9 +132,10 @@
     [cell.favoritedButton setTitle:countString forState:UIControlStateNormal];
     countString = [NSString stringWithFormat: @"%d", tweet.retweetCount];
     [cell.retweetButton setTitle:countString forState:UIControlStateNormal];
-    //cell.retweetButton.textInputMode = tweet.retweetCount;
     
     NSString *URLString = tweet.user.profilePicture;
+    URLString = [URLString
+           stringByReplacingOccurrencesOfString:@"_normal" withString:@""];
     NSURL *url = [NSURL URLWithString:URLString];
     
     cell.profilePicture.image = nil;
@@ -122,12 +160,17 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UITableView *tappedCell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell: tappedCell];
-    Tweet *tappedTweet = self.arrayOfTweets[indexPath.row];
     
-    DetailsViewController *detailViewController = [segue destinationViewController];
-    detailViewController.tweet = tappedTweet;
+    if([segue.identifier isEqualToString:@"detailsSegue"]) {
+        UITableView *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell: tappedCell];
+        Tweet *tappedTweet = self.arrayOfTweets[indexPath.row];
+        
+        DetailsViewController *detailViewController = [segue destinationViewController];
+        detailViewController.tweet = tappedTweet;
+    } else if([segue.identifier isEqualToString:@"composeSegue"]) {
+        
+    }
     
 }
 
